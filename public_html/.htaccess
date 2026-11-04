@@ -1,7 +1,8 @@
 # The installer downloads instead of opening, and version.json is always fresh
 # (MercScribe reads it once a day to see if there's a new version).
 AddType application/octet-stream .exe
-<Files "version.json">
-  Header set Cache-Control "no-cache"
-</Files>
-Options -Indexes
+<IfModule mod_headers.c>
+  <Files "version.json">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>
