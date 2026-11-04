@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MercScribe · Mercurious VA</title>
+  <meta name="description" content="MercScribe: a free Windows app for voice actors. Transcribe your takes on your own PC, match them to your script, keep the best ones, mix, subtitle and cut shorts.">
+  <link rel="icon" href="icon.png">
+  <style>
+    /* Match these to the colours set in the website's admin zone. */
+    :root {
+      --bg: #14111b;
+      --bg-image: none;            /* e.g. url("/images/forest.jpg") */
+      --glow-1: rgb(98 52 160 / 35%);
+      --glow-2: rgb(214 104 60 / 18%);
+      --card: rgb(32 28 42 / 88%);
+      --card-line: rgb(255 255 255 / 8%);
+      --text: #efe9f3;
+      --muted: #a89fb4;
+      --accent: #e8776a;
+      --accent-ink: #fff;
+      --heading: Georgia, "Times New Roman", serif;
+      --body: system-ui, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text); font: 15px/1.6 var(--body);
+      background:
+        radial-gradient(900px 600px at 15% 10%, var(--glow-1), transparent 70%),
+        radial-gradient(700px 500px at 90% 80%, var(--glow-2), transparent 70%),
+        var(--bg-image) center / cover fixed, var(--bg);
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+    .top { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+    .top a { color: var(--text); font-family: var(--heading); font-size: 19px; text-decoration: none; }
+    .top a span { color: var(--accent); }
+    h1, h2, h3 { font-family: var(--heading); font-weight: 500; line-height: 1.2; }
+    h2 { margin: 56px 0 16px; font-size: 24px; }
+    h3 { margin: 0 0 6px; font-size: 17px; }
+    .card { padding: 20px; border: 1px solid var(--card-line); border-radius: 14px; background: var(--card); backdrop-filter: blur(6px); }
+    .muted { color: var(--muted); }
+
+    .hero { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; padding: 28px; }
+    .hero img { width: 112px; height: 112px; border-radius: 24px; }
+    .hero h1 { margin: 0; font-size: 40px; }
+    .hero p { margin: 6px 0 18px; font-size: 16px; }
+    .button { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 650; text-decoration: none; }
+    .button:hover { filter: brightness(1.08); }
+    .button.ghost { background: transparent; color: var(--accent); }
+    .download-meta { margin-top: 10px; font-size: 13px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 14px; }
+    .step { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .grid p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    ul.notes { margin: 0; padding-left: 20px; }
+    ul.notes li { margin: 6px 0; }
+
+    .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 14px; }
+    .tier { display: flex; flex-direction: column; gap: 10px; }
+    .tier .price { font-family: var(--heading); font-size: 30px; }
+    .tier p { margin: 0; color: var(--muted); font-size: 14px; flex: 1; }
+    .tier .button { align-self: flex-start; }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 9px; background: #4a2633; color: #f3aac3; font-size: 12px; font-weight: 650; }
+
+    footer { margin-top: 56px; color: var(--muted); font-size: 13px; text-align: center; }
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero img { margin: 0 auto; }
+      .hero h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top"><a href="/">← Mercurious <span>VA</span></a></nav>
+
+    <section class="card hero">
+      <img src="icon.png" alt="">
+      <div>
+        <h1>MercScribe</h1>
+        <p>Record your script, and MercScribe finds every take of every line, so you keep the best ones and get to the mix, the subtitles and the shorts faster.</p>
+        <a class="button" id="download" href="#">⤓ Download for Windows</a>
+        <div class="download-meta muted" id="downloadMeta">Free · Windows 10 and 11, 64-bit</div>
+      </div>
+    </section>
+
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card"><div class="step">1 · Line edit</div><h3>Every take, matched to its line</h3><p>Whisper transcribes your recordings on your own PC and matches them to your script. Pick the keepers, spot improv and bloopers, and export the edit as WAV and SRT.</p></div>
+      <div class="card"><div class="step">2 · Mix</div><h3>A small DaVinci-style timeline</h3><p>Your kept takes on a track per voice, with sound effects and ambience. Fades, volume and pan, then export the mix or an OTIO timeline for DaVinci.</p></div>
+      <div class="card"><div class="step">3 · Subtitles</div><h3>Subtitles from the words you said</h3><p>Fine-tune them on the finished mix, style them, and export SRT or an MP4 with the subtitles burned in over your picture.</p></div>
+      <div class="card"><div class="step">4 · Shorts</div><h3>Vertical shorts with captions</h3><p>Cut shorts from any video, even a 4-hour stream, with captions made for you.</p></div>
+    </div>
+
+    <h2 id="newHead" hidden>New in <span id="newVersion"></span></h2>
+    <div class="card" id="newCard" hidden><ul class="notes" id="notes"></ul></div>
+
+    <h2>Before you install</h2>
+    <div class="card">
+      <ul class="notes">
+        <li><b>Your recordings stay on your computer.</b> Transcribing runs on your own PC; nothing is uploaded.</li>
+        <li><b>Whisper is downloaded the first time you transcribe</b> (about 3 GB for the most accurate model; Settings has smaller ones).</li>
+        <li><b>An NVIDIA graphics card makes it much faster.</b> The installer offers GPU support when it finds one (another 1.3 GB download). Without one it runs on the processor, more slowly.</li>
+        <li><b>Windows may warn about the installer</b>, because it isn't signed: click <i>More info → Run anyway</i>.</li>
+        <li><b>Updating:</b> download and run the new installer. It updates MercScribe where it is and keeps your settings. MercScribe tells you in its top bar when there's a new version.</li>
+      </ul>
+    </div>
+
+    <h2 id="support">Support MercScribe</h2>
+    <p class="muted">MercScribe is free, and keeps working whether you buy it or not. If it saves you time, buying it gives you a code that stops the reminders to support it, in this version and every one after it.</p>
+    <div class="tiers">
+      <div class="card tier">
+        <h3>Supporter</h3>
+        <div class="price">$15</div>
+        <p>No more reminders, and my heartfelt thanks.</p>
+        <a class="button" href="https://mercuriousva-shop.fourthwall.com/products/support-mercscribe">☕ Support MercScribe</a>
+      </div>
+      <div class="card tier">
+        <h3>Lovely supporter</h3>
+        <div class="price">$35</div>
+        <p>No more reminders, and MercScribe thanks you in its top bar: <span class="badge">♥ Lovely supporter</span></p>
+        <a class="button ghost" href="https://mercuriousva-shop.fourthwall.com/products/support-mercscribe-with-more-love">♥ With more love</a>
+      </div>
+    </div>
+
+    <footer>MercScribe is made by Mercurious VA.</footer>
+  </div>
+
+  <script>
+    // version.json is written by build-installer.ps1 next to this page, with the installer.
+    fetch('version.json', { cache: 'no-store' }).then((r) => r.json()).then((v) => {
+      const link = document.getElementById('download');
+      link.href = v.file;
+      link.textContent = `⤓ Download MercScribe ${v.version}`;
+      document.getElementById('downloadMeta').textContent =
+        `Free · Windows 10 and 11, 64-bit · ${v.sizeMB} MB${v.date ? ` · ${v.date}` : ''}`;
+      const notes = (v.news || []).filter(Boolean);
+      if (notes.length) {
+        document.getElementById('newVersion').textContent = v.version;
+        document.getElementById('notes').innerHTML = notes.map((n) => `<li>${n.replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[c])}</li>`).join('');
+        document.getElementById('newHead').hidden = document.getElementById('newCard').hidden = false;
+      }
+    }).catch(() => { document.getElementById('downloadMeta').textContent = 'The download is being updated. Please try again in a little while.'; });
+  </script>
+</body>
+</html>
