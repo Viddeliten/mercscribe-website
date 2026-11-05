@@ -1,10 +1,10 @@
 # The download page's list of older versions.
-# Usage (from this folder):  powershell -ExecutionPolicy Bypass -File versions.ps1 [-Hide <version>] [-Show <version>] [-NoCommit]
+# Usage (from this folder):  powershell -ExecutionPolicy Bypass -File versions.ps1 [-Hide <version>] [-Show <version>]
 #   (nothing)        update the list in public_html\version.json from the installers in public_html\downloads
 #   -Hide 1.9.20     move that installer to hidden\ (kept, but not on the web) and take it off the list
 #   -Show 1.9.20     put a hidden one back
-#   -NoCommit        don't commit (build-installer.ps1 commits itself)
-param([string]$Hide, [string]$Show, [switch]$NoCommit)
+# It never commits: look it over, then commit and push it yourself.
+param([string]$Hide, [string]$Show)
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 $utf8 = New-Object System.Text.UTF8Encoding($false)
@@ -38,12 +38,3 @@ $info | Add-Member -NotePropertyName older -NotePropertyValue $older -Force
 Write-Host "Older versions on the page: $(if ($older) { ($older.version) -join ', ' } else { 'none' })."
 $hidden = @(Get-ChildItem "hidden" -Filter "MercScribe-Setup-*.exe" | ForEach-Object { $_.BaseName -replace '^MercScribe-Setup-', '' })
 if ($hidden) { Write-Host "Hidden: $($hidden -join ', ')." }
-
-if (-not $NoCommit) {
-    git add -A
-    git diff --cached --quiet
-    if ($LASTEXITCODE) {
-        git commit -q -m $(if ($Hide) { "Hide $Hide" } elseif ($Show) { "Show $Show" } else { "Update the list of versions" })
-        Write-Host "Committed. Push it, then git pull on the server."
-    }
-}
