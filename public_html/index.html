@@ -65,6 +65,11 @@
     .tier .button { align-self: flex-start; }
     .badge { display: inline-block; padding: 1px 8px; border-radius: 9px; background: #4a2633; color: #f3aac3; font-size: 12px; font-weight: 650; }
 
+    .older { margin-top: 48px; font-size: 13px; }
+    .older h3 { font-size: 15px; }
+    .older ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    .older a { color: var(--muted); }
+    .older a:hover { color: var(--accent); }
     footer { margin-top: 56px; color: var(--muted); font-size: 13px; text-align: center; }
     @media (max-width: 600px) {
       .hero { grid-template-columns: 1fr; text-align: center; }
@@ -104,7 +109,8 @@
         <li><b>Your recordings stay on your computer.</b> Transcribing runs on your own PC; nothing is uploaded.</li>
         <li><b>Whisper is downloaded the first time you transcribe</b> (about 3 GB for the most accurate model; Settings has smaller ones).</li>
         <li><b>An NVIDIA graphics card makes it much faster.</b> The installer offers GPU support when it finds one (another 1.3 GB download). Without one it runs on the processor, more slowly.</li>
-        <li><b>Windows may warn about the installer</b>, because it isn't signed: click <i>More info → Run anyway</i>.</li>
+        <li><b>Your browser may block the download</b> as "suspicious", because MercScribe is new and not many people have downloaded it yet. It's safe: in Chrome, click the download (Ctrl+J) and choose <i>Download suspicious file</i>. In Edge, choose <i>… → Keep → Show more → Keep anyway</i>.</li>
+        <li><b>Windows may warn about the installer</b> for the same reason: click <i>More info → Run anyway</i>.</li>
         <li><b>Updating:</b> download and run the new installer. It updates MercScribe where it is and keeps your settings. MercScribe tells you in its top bar when there's a new version.</li>
       </ul>
     </div>
@@ -126,10 +132,17 @@
       </div>
     </div>
 
+    <section class="older" id="olderBox" hidden>
+      <h3>Older versions</h3>
+      <p class="muted">If a new version gives you trouble, an older one can go back over it (the installer warns first). Projects saved in a newer version may not open in an older one.</p>
+      <ul id="older"></ul>
+    </section>
+
     <footer>MercScribe is made by Mercurious VA.</footer>
   </div>
 
   <script>
+    const esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c]);
     // version.json is written by build-installer.ps1 next to this page, with the installer.
     fetch('version.json', { cache: 'no-store' }).then((r) => r.json()).then((v) => {
       const link = document.getElementById('download');
@@ -137,10 +150,16 @@
       link.textContent = `⤓ Download MercScribe ${v.version}`;
       document.getElementById('downloadMeta').textContent =
         `Free · Windows 10 and 11, 64-bit · ${v.sizeMB} MB${v.date ? ` · ${v.date}` : ''}`;
+      const older = v.older || [];
+      if (older.length) {
+        document.getElementById('older').innerHTML = older.map((o) =>
+          `<li><a href="${encodeURI(o.file)}">${esc(o.version)}</a> <span class="muted">· ${o.sizeMB} MB · ${esc(o.date)}</span></li>`).join('');
+        document.getElementById('olderBox').hidden = false;
+      }
       const notes = (v.news || []).filter(Boolean);
       if (notes.length) {
         document.getElementById('newVersion').textContent = v.version;
-        document.getElementById('notes').innerHTML = notes.map((n) => `<li>${n.replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[c])}</li>`).join('');
+        document.getElementById('notes').innerHTML = notes.map((n) => `<li>${esc(n)}</li>`).join('');
         document.getElementById('newHead').hidden = document.getElementById('newCard').hidden = false;
       }
     }).catch(() => { document.getElementById('downloadMeta').textContent = 'The download is being updated. Please try again in a little while.'; });

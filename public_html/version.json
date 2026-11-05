@@ -1,18 +1,20 @@
 {
     "version":  "1.9.22",
     "url":  "https://mercurious.love/mercscribe/",
-    "file":  "MercScribe-Setup-1.9.22.exe",
+    "file":  "downloads/MercScribe-Setup-1.9.22.exe",
     "sizeMB":  70,
     "date":  "2026-11-05",
-    "notes":  "Support MercScribe; New versions; Off the script, in a finished line edit in 2 · Mix",
+    "notes":  "Support MercScribe; Off the script, in a finished line edit in 2 · Mix",
     "news":  [
                  "Support MercScribe",
-                 "New versions",
                  "Off the script, in a finished line edit in 2 · Mix",
                  "Zoom and move the background picture in 3 · Subtitles",
                  "Selecting more than one clip in 2 · Mix",
                  "Copy and paste clips in 2 · Mix",
                  "Checks in 2 · Mix",
                  "Snapping in 2 · Mix can be turned off"
-             ]
+             ],
+    "older":  [
+
+              ]
 }

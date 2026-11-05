@@ -2,6 +2,9 @@
 # (MercScribe reads it once a day to see if there's a new version).
 AddType application/octet-stream .exe
 <IfModule mod_headers.c>
+  <FilesMatch "\.exe$">
+    Header set Content-Disposition "attachment"
+  </FilesMatch>
   <Files "version.json">
     Header set Cache-Control "no-cache"
   </Files>
