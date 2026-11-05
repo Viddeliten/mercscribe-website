@@ -1,6 +1,6 @@
 {
     "version":  "1.9.22",
-    "url":  "https://mercurious.love/mercscribe/",
+    "url":  "https://mercurious.love/app/mercscribe/",
     "file":  "downloads/MercScribe-Setup-1.9.22.exe",
     "sizeMB":  70,
     "date":  "2026-11-05",
@@ -15,6 +15,21 @@
                  "Snapping in 2 · Mix can be turned off"
              ],
     "older":  [
-
+                  {
+                      "version":  "1.9.0",
+                      "file":  "downloads/MercScribe-Setup-1.9.0.exe",
+                      "sizeMB":  70,
+                      "date":  "2026-10-26",
+                      "news":  [
+                                   "Finished line edits in 2 · Mix",
+                                   "Missing lines on the mix",
+                                   "Script panel in 2 · Mix",
+                                   "The script in its own window",
+                                   "Size of text and buttons",
+                                   "Increased maximum number of lines",
+                                   "Loop overlap",
+                                   "Taking a piece out"
+                               ]
+                  }
               ]
 }

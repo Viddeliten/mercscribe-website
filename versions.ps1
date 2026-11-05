@@ -26,11 +26,24 @@ if ($Show) {
     Move-Item $file "$downloads\"
 }
 
+# What each version brought: the bold start of each change in its section of MercScribe's
+# CHANGELOG.md (this folder is inside MercScribe). News already in the list is kept, so it
+# can be edited by hand.
+$changelogFile = Join-Path $PSScriptRoot "..\CHANGELOG.md"
+$changelog = if (Test-Path $changelogFile) { [IO.File]::ReadAllText($changelogFile, $utf8) } else { "" }
+$newsOf = { param($v)
+    $section = [regex]::Match($changelog, "(?ms)^## $([regex]::Escape($v))\b.*?(?=^## |\z)").Value
+    @([regex]::Matches($section, '(?m)^- \*\*(.+?)\*\*') | ForEach-Object { $_.Groups[1].Value.TrimEnd(':', ',', ' ') } | Select-Object -First 8)
+}
+$known = @{}
+foreach ($o in @($info.older)) { if ($o -and $o.news) { $known[$o.version] = @($o.news) } }
+
 # Every installer in downloads\ except the one the page offers, newest first.
 $older = @(Get-ChildItem $downloads -Filter "MercScribe-Setup-*.exe" | ForEach-Object {
     $v = $_.BaseName -replace '^MercScribe-Setup-', ''
     if ($v -ne $info.version) {
-        [pscustomobject][ordered]@{ version = $v; file = "downloads/$($_.Name)"; sizeMB = [math]::Round($_.Length / 1MB); date = $_.LastWriteTime.ToString('yyyy-MM-dd') }
+        $news = if ($known.ContainsKey($v)) { $known[$v] } else { & $newsOf $v }
+        [pscustomobject][ordered]@{ version = $v; file = "downloads/$($_.Name)"; sizeMB = [math]::Round($_.Length / 1MB); date = $_.LastWriteTime.ToString('yyyy-MM-dd'); news = @($news) }
     }
 } | Sort-Object { [version]$_.version } -Descending)
 $info | Add-Member -NotePropertyName older -NotePropertyValue $older -Force

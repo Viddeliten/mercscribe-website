@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MercScribe · Mercurious VA</title>
-  <meta name="description" content="MercScribe: a free Windows app for voice actors. Transcribe your takes on your own PC, match them to your script, keep the best ones, mix, subtitle and cut shorts.">
+  <meta name="description" content="MercScribe: a free Windows app for voice actors. Transcribe your takes, match them to your script, keep the best ones, mix, subtitle and cut shorts.">
   <link rel="icon" href="icon.png">
   <style>
     /* Match these to the colours set in the website's admin zone. */
@@ -67,7 +67,12 @@
 
     .older { margin-top: 48px; font-size: 13px; }
     .older h3 { font-size: 15px; }
-    .older ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    .older ul.list { margin: 0; padding: 0; list-style: none; }
+    .older ul.list > li { padding: 6px 0; border-top: 1px solid var(--card-line); }
+    .older details { display: inline; }
+    .older summary { display: inline; margin-left: 10px; color: var(--muted); cursor: pointer; }
+    .older summary:hover { color: var(--accent); }
+    .older details ul { margin: 6px 0 2px; padding-left: 20px; color: var(--muted); }
     .older a { color: var(--muted); }
     .older a:hover { color: var(--accent); }
     footer { margin-top: 56px; color: var(--muted); font-size: 13px; text-align: center; }
@@ -94,8 +99,8 @@
 
     <h2>What it does</h2>
     <div class="grid">
-      <div class="card"><div class="step">1 · Line edit</div><h3>Every take, matched to its line</h3><p>Whisper transcribes your recordings on your own PC and matches them to your script. Pick the keepers, spot improv and bloopers, and export the edit as WAV and SRT.</p></div>
-      <div class="card"><div class="step">2 · Mix</div><h3>A small DaVinci-style timeline</h3><p>Your kept takes on a track per voice, with sound effects and ambience. Fades, volume and pan, then export the mix or an OTIO timeline for DaVinci.</p></div>
+      <div class="card"><div class="step">1 · Line edit</div><h3>Every take, matched to its line</h3><p>Whisper transcribes your recordings and matches them to your script. Pick the keepers, spot improv and bloopers, and export the edit as WAV and SRT.</p></div>
+      <div class="card"><div class="step">2 · Mix</div><h3>Build the finished audio</h3><p>Your kept takes on a track per voice, with sound effects and ambience. Fades, volume and pan over time, then export the mix, or a timeline to go on in your video editor.</p></div>
       <div class="card"><div class="step">3 · Subtitles</div><h3>Subtitles from the words you said</h3><p>Fine-tune them on the finished mix, style them, and export SRT or an MP4 with the subtitles burned in over your picture.</p></div>
       <div class="card"><div class="step">4 · Shorts</div><h3>Vertical shorts with captions</h3><p>Cut shorts from any video, even a 4-hour stream, with captions made for you.</p></div>
     </div>
@@ -106,7 +111,7 @@
     <h2>Before you install</h2>
     <div class="card">
       <ul class="notes">
-        <li><b>Your recordings stay on your computer.</b> Transcribing runs on your own PC; nothing is uploaded.</li>
+        <li><b>Your recordings stay on your computer.</b> Transcribing runs locally; nothing is uploaded.</li>
         <li><b>Whisper is downloaded the first time you transcribe</b> (about 3 GB for the most accurate model; Settings has smaller ones).</li>
         <li><b>An NVIDIA graphics card makes it much faster.</b> The installer offers GPU support when it finds one (another 1.3 GB download). Without one it runs on the processor, more slowly.</li>
         <li><b>Your browser may block the download</b> as "suspicious", because MercScribe is new and not many people have downloaded it yet. It's safe: in Chrome, click the download (Ctrl+J) and choose <i>Download suspicious file</i>. In Edge, choose <i>… → Keep → Show more → Keep anyway</i>.</li>
@@ -135,7 +140,7 @@
     <section class="older" id="olderBox" hidden>
       <h3>Older versions</h3>
       <p class="muted">If a new version gives you trouble, an older one can go back over it (the installer warns first). Projects saved in a newer version may not open in an older one.</p>
-      <ul id="older"></ul>
+      <ul class="list" id="older"></ul>
     </section>
 
     <footer>MercScribe is made by Mercurious VA.</footer>
@@ -153,7 +158,8 @@
       const older = v.older || [];
       if (older.length) {
         document.getElementById('older').innerHTML = older.map((o) =>
-          `<li><a href="${encodeURI(o.file)}">${esc(o.version)}</a> <span class="muted">· ${o.sizeMB} MB · ${esc(o.date)}</span></li>`).join('');
+          `<li><a href="${encodeURI(o.file)}">${esc(o.version)}</a> <span class="muted">· ${o.sizeMB} MB · ${esc(o.date)}</span>${
+            (o.news || []).length ? `<details><summary>What was new</summary><ul>${o.news.map((n) => `<li>${esc(n)}</li>`).join('')}</ul></details>` : ''}</li>`).join('');
         document.getElementById('olderBox').hidden = false;
       }
       const notes = (v.news || []).filter(Boolean);
