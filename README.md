@@ -3,8 +3,8 @@
 `public_html/` is the download page for MercScribe. Only that folder is on the web; this
 file and `.git` stay outside it.
 
-`build-installer.ps1` in the MercScribe folder puts each new installer here, writes
-`public_html/version.json` and commits it. Push it, then on the server:
+`build-installer.ps1` in the MercScribe folder puts each new installer here and writes
+`public_html/version.json`. Look it over, commit and push it, then on the server:
 
     cd /home/storybook/domains/mercscribe && git pull
 
@@ -18,6 +18,6 @@ others are listed under *Older versions*. To keep one but take it off the web:
     powershell -ExecutionPolicy Bypass -File versions.ps1 -Hide 1.9.20
 
 That moves it to `hidden/` (outside `public_html`, so it can't be downloaded) and updates the
-list; `-Show 1.9.20` puts it back. Both commit; push and pull as above.
+list; `-Show 1.9.20` puts it back. Neither commits: commit, push and pull as above.
 
 The page's colours are variables at the top of `public_html/index.html`.
