@@ -75,6 +75,30 @@
     .older details ul { margin: 6px 0 2px; padding-left: 20px; color: var(--muted); }
     .older a { color: var(--muted); }
     .older a:hover { color: var(--accent); }
+    /* The four steps overlap in a ring, each over the next: left over top over right over
+       bottom over left. The second copy of the left one (.over) is cut to its upper part,
+       so it lies over the top one while its lower part stays under the bottom one. */
+    .shots { position: relative; aspect-ratio: 100 / 62; margin: 48px 0 0; }
+    .shot { position: absolute; width: 50%; border: 1px solid var(--card-line); border-radius: 10px; overflow: hidden; box-shadow: 0 18px 40px rgb(0 0 0 / 50%); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot:hover { border-color: var(--accent); }
+    .shot span { position: absolute; padding: 3px 10px; border-radius: 999px; background: rgb(0 0 0 / 72%); color: var(--text); font-size: 12px; font-weight: 650; }
+    .shot .tl { top: 8px; left: 8px; }
+    .shot .bl { bottom: 8px; left: 8px; }
+    .shot .br { bottom: 8px; right: 8px; }
+    .s-top { left: 22%; top: 0; z-index: 4; }
+    .s-right { left: 50%; top: 24%; z-index: 3; }
+    .s-bottom { left: 20%; top: 56%; z-index: 2; }
+    .s-left { left: 0; top: 26%; z-index: 1; }
+    .s-left.over { z-index: 5; clip-path: inset(0 0 33% 0); box-shadow: none; }
+    .shots-note { margin: 10px 0 0; font-size: 13px; text-align: center; }
+    @media (max-width: 700px) {
+      .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; aspect-ratio: auto; }
+      .shot { position: relative; inset: auto; width: auto; box-shadow: none; }
+      .s-left.over { display: none; }
+      .s-left { order: 4; }
+      .shot span { font-size: 10px; padding: 2px 7px; }
+    }
     footer { margin-top: 56px; color: var(--muted); font-size: 13px; text-align: center; }
     @media (max-width: 600px) {
       .hero { grid-template-columns: 1fr; text-align: center; }
@@ -96,6 +120,15 @@
         <div class="download-meta muted" id="downloadMeta">Free · Windows 10 and 11, 64-bit</div>
       </div>
     </section>
+
+    <div class="shots" aria-label="What MercScribe looks like">
+      <a class="shot s-top" href="screens/line-edit.jpg" target="_blank"><img src="screens/line-edit.jpg" alt="1 · Line edit: the recording's takes in order, the kept ones ticked, with a stretch being transcribed again"><span class="tl">1 · Line edit</span></a>
+      <a class="shot s-right" href="screens/mix.jpg" target="_blank"><img src="screens/mix.jpg" alt="2 · Mix: voice, sound effect and ambience tracks on a timeline, with the script beside it"><span class="br">2 · Mix</span></a>
+      <a class="shot s-bottom" href="screens/subtitles.jpg" target="_blank"><img src="screens/subtitles.jpg" alt="3 · Subtitles: the subtitles over the picture, with the waveform and the list of subtitles"><span class="bl">3 · Subtitles</span></a>
+      <a class="shot s-left" href="screens/shorts.jpg" target="_blank"><img src="screens/shorts.jpg" alt="4 · Shorts: a stream with boxes choosing what the vertical short shows"><span class="tl">4 · Shorts</span></a>
+      <a class="shot s-left over" href="screens/shorts.jpg" target="_blank" aria-hidden="true" tabindex="-1"><img src="screens/shorts.jpg" alt=""><span class="tl">4 · Shorts</span></a>
+    </div>
+    <p class="shots-note muted">Click a picture to see it bigger.</p>
 
     <h2>What it does</h2>
     <div class="grid">
