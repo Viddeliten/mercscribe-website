@@ -8,13 +8,14 @@ file and `.git` stay outside it.
 
     cd /home/storybook/domains/mercscribe && git pull
 
-The page shows at mercurious.love/mercscribe through a link made once:
+The page shows at mercurious.love/app/mercscribe through a link made once:
 
-    ln -s /home/storybook/domains/mercscribe/public_html /home/storybook/domains/mercurious.love/public_html/mercscribe
+    ln -s /home/storybook/domains/mercscribe/public_html /home/storybook/domains/mercurious.love/public_html/app/mercscribe
 
 Installers are in `public_html/downloads/`. The newest is the one the page offers, and the
 others are listed under *Older versions*, each with *What was new*, taken from its section of
-MercScribe's CHANGELOG.md (the bold start of each change). The news is in
+MercScribe's CHANGELOG.md (the bold start of each change, or the whole *Highlights* list when
+the section starts with one; the text before its list shows above it). The news is in
 `public_html/version.json` and can be edited there; running the script again keeps it.
 To keep one but take it off the web:
 

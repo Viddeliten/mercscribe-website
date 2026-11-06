@@ -139,6 +139,7 @@
     </div>
 
     <h2 id="newHead" hidden>New in <span id="newVersion"></span></h2>
+    <p id="newSummary" hidden></p>
     <div class="card" id="newCard" hidden><ul class="notes" id="notes"></ul></div>
 
     <h2>Before you install</h2>
@@ -181,6 +182,8 @@
 
   <script>
     const esc = (t) => String(t).replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c]);
+    // The news comes from CHANGELOG.md: **bold** and *italics* are kept.
+    const md = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>');
     // version.json is written by build-installer.ps1 next to this page, with the installer.
     fetch('version.json', { cache: 'no-store' }).then((r) => r.json()).then((v) => {
       const link = document.getElementById('download');
@@ -192,14 +195,18 @@
       if (older.length) {
         document.getElementById('older').innerHTML = older.map((o) =>
           `<li><a href="${encodeURI(o.file)}">${esc(o.version)}</a> <span class="muted">· ${o.sizeMB} MB · ${esc(o.date)}</span>${
-            (o.news || []).length ? `<details><summary>What was new</summary><ul>${o.news.map((n) => `<li>${esc(n)}</li>`).join('')}</ul></details>` : ''}</li>`).join('');
+            (o.news || []).length ? `<details><summary>What was new</summary><ul>${o.news.map((n) => `<li>${md(n)}</li>`).join('')}</ul></details>` : ''}</li>`).join('');
         document.getElementById('olderBox').hidden = false;
       }
       const notes = (v.news || []).filter(Boolean);
       if (notes.length) {
         document.getElementById('newVersion').textContent = v.version;
-        document.getElementById('notes').innerHTML = notes.map((n) => `<li>${esc(n)}</li>`).join('');
+        document.getElementById('notes').innerHTML = notes.map((n) => `<li>${md(n)}</li>`).join('');
         document.getElementById('newHead').hidden = document.getElementById('newCard').hidden = false;
+        if (v.summary) {
+          document.getElementById('newSummary').innerHTML = md(v.summary);
+          document.getElementById('newSummary').hidden = false;
+        }
       }
     }).catch(() => { document.getElementById('downloadMeta').textContent = 'The download is being updated. Please try again in a little while.'; });
   </script>
