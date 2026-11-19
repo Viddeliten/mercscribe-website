@@ -1,24 +1,47 @@
 {
-    "version":  "2.0.0",
+    "version":  "2.1.0",
     "url":  "https://mercurious.love/app/mercscribe/",
-    "file":  "downloads/MercScribe-Setup-2.0.0.exe",
+    "file":  "downloads/MercScribe-Setup-2.1.0.exe",
     "sizeMB":  70,
-    "date":  "2026-11-06",
-    "notes":  "The Mix step (2 · Mix), all new; Bring a finished line edit; Versions in one project",
-    "summary":  "MercScribe 2.0 takes a script and its recordings all the way to a finished video: pick the best takes, mix them with sound effects and ambience, subtitle the mix and render it as an MP4. Everything runs on your own computer. New since 1.0:",
+    "date":  "2026-11-19",
+    "notes":  "",
+    "summary":  "",
     "news":  [
-                 "**The Mix step (2 · Mix), all new:** your kept takes on a track per voice, with sound effects and ambience beds from your own sound library. Directions in the script, like *[Door creaks]*, are marked on the timeline with matching sounds. Fades, volume and pan over time, a mixer with a strip per track, and export as WAV, MP3 or a timeline for your video editor.",
-                 "**Bring a finished line edit:** already edited a recording elsewhere? A voice track can play it whole, and MercScribe still shows which script lines it\u0027s missing and where it goes off the script.",
-                 "**Versions in one project:** say, a version for a male listener and one for a female listener, or any other alternatives the script needs. Write them as *he/she* or *{my boyfriend|my girlfriend}*, and each such line gets a reading per version, recorded and kept on its own. Everything else is shared, and you get a mix, subtitles and a video of each version.",
-                 "**Subtitles that fit what was said:** words lined up with the audio, punctuation and spelling taken from the script, and words, edges and joins you can drag to fix them. Lock what you\u0027ve checked, and *Regenerate* leaves it as it is.",
-                 "**A finished video from the Subtitles step (3 · Subtitles):** an MP4 of the mix with the subtitles burned in, over a picture or a video of your own.",
-                 "**The Shorts step (4 · Shorts):** cut vertical shorts with captions from any video, even a 4-hour stream. *Suggest moments* finds the laughs, screams and shouts for you.",
-                 "**Every line as a file of its own:** a *# File:* note under a line names its file, and one export saves them all, with alternative takes as extra files and even loudness if you like.",
-                 "**Sounds to censor:** finds kisses and mouth sounds in the mix and exports them as markers for your video editor. It learns from what you mark.",
-                 "**Tools:** clean up a recording (loudness, noise and room echo), rebuild an edit from the original recording, stitch audio files together, and a time log of how long you\u0027ve worked on each project.",
-                 "**Streaming mode** hides your folders and file paths while you\u0027re live."
+
              ],
     "older":  [
+                  {
+                      "version":  "2.0.74",
+                      "file":  "downloads/MercScribe-Setup-2.0.74.exe",
+                      "sizeMB":  70,
+                      "date":  "2026-11-19",
+                      "news":  [
+                                   "**4 · Intro \u0026 outro:** an intro and an outro around the video from 3 · Subtitles, rendered as one video. A wizard makes your first ones from a few questions, and saves them to start from next time.",
+                                   "**Scrolling credits and a thank-you screen made of blocks:** text, pictures, your Patreon supporters and YouTube members, with letters that drop in as they scroll.",
+                                   "**Transitions and movements:** fades, slides, zooms, wipes and a drop warp, and texts and pictures that move and grow, dragged into place in the preview.",
+                                   "**EQ, de-esser and compressor on any clip\u0027s sound,** in 2 · Mix, 3 · Subtitles and 4 · Intro \u0026 outro, with pictures of what they do and a loop to listen to while you change them. *Fix it for this part* tunes the de-esser for the \"s\" or whistle you loop.",
+                                   "**A subtitle look for each clip:** an outro talk\u0027s subtitles somewhere else and in other colours from the video\u0027s.",
+                                   "**Scrubbing, right-click menus and copy and paste** on the timelines, and the app\u0027s own dialogs everywhere."
+                               ]
+                  },
+                  {
+                      "version":  "2.0.0",
+                      "file":  "downloads/MercScribe-Setup-2.0.0.exe",
+                      "sizeMB":  70,
+                      "date":  "2026-11-06",
+                      "news":  [
+                                   "**The Mix step (2 · Mix), all new:** your kept takes on a track per voice, with sound effects and ambience beds from your own sound library. Directions in the script, like *[Door creaks]*, are marked on the timeline with matching sounds. Fades, volume and pan over time, a mixer with a strip per track, and export as WAV, MP3 or a timeline for your video editor.",
+                                   "**Bring a finished line edit:** already edited a recording elsewhere? A voice track can play it whole, and MercScribe still shows which script lines it\u0027s missing and where it goes off the script.",
+                                   "**Versions in one project:** say, a version for a male listener and one for a female listener, or any other alternatives the script needs. Write them as *he/she* or *{my boyfriend|my girlfriend}*, and each such line gets a reading per version, recorded and kept on its own. Everything else is shared, and you get a mix, subtitles and a video of each version.",
+                                   "**Subtitles that fit what was said:** words lined up with the audio, punctuation and spelling taken from the script, and words, edges and joins you can drag to fix them. Lock what you\u0027ve checked, and *Regenerate* leaves it as it is.",
+                                   "**A finished video from the Subtitles step (3 · Subtitles):** an MP4 of the mix with the subtitles burned in, over a picture or a video of your own.",
+                                   "**The Shorts step (4 · Shorts):** cut vertical shorts with captions from any video, even a 4-hour stream. *Suggest moments* finds the laughs, screams and shouts for you.",
+                                   "**Every line as a file of its own:** a *# File:* note under a line names its file, and one export saves them all, with alternative takes as extra files and even loudness if you like.",
+                                   "**Sounds to censor:** finds kisses and mouth sounds in the mix and exports them as markers for your video editor. It learns from what you mark.",
+                                   "**Tools:** clean up a recording (loudness, noise and room echo), rebuild an edit from the original recording, stitch audio files together, and a time log of how long you\u0027ve worked on each project.",
+                                   "**Streaming mode** hides your folders and file paths while you\u0027re live."
+                               ]
+                  },
                   {
                       "version":  "1.9.22",
                       "file":  "downloads/MercScribe-Setup-1.9.22.exe",
