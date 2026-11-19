@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MercScribe · Mercurious VA</title>
-  <meta name="description" content="MercScribe: a free Windows app for voice actors. Transcribe your takes, match them to your script, keep the best ones, mix, subtitle and cut shorts.">
+  <meta name="description" content="MercScribe: a free Windows app for voice actors. Transcribe your takes, match them to your script, keep the best ones, mix, subtitle, add an intro and outro, render the video and cut shorts.">
   <link rel="icon" href="icon.png">
   <style>
     /* Match these to the colours set in the website's admin zone. */
@@ -75,28 +75,26 @@
     .older details ul { margin: 6px 0 2px; padding-left: 20px; color: var(--muted); }
     .older a { color: var(--muted); }
     .older a:hover { color: var(--accent); }
-    /* The four steps overlap in a ring, each over the next: left over top over right over
-       bottom over left. The second copy of the left one (.over) is cut to its upper part,
-       so it lies over the top one while its lower part stays under the bottom one. */
-    .shots { position: relative; aspect-ratio: 100 / 62; margin: 48px 0 0; }
-    .shot { position: absolute; width: 50%; border: 1px solid var(--card-line); border-radius: 10px; overflow: hidden; box-shadow: 0 18px 40px rgb(0 0 0 / 50%); }
+    /* The five steps in two overlapping rows: three at the top, the middle one in front,
+       and two in front of them below. */
+    .shots { position: relative; aspect-ratio: 100 / 52; margin: 48px 0 0; }
+    .shot { position: absolute; width: 44%; border: 1px solid var(--card-line); border-radius: 10px; overflow: hidden; box-shadow: 0 18px 40px rgb(0 0 0 / 50%); }
     .shot img { display: block; width: 100%; height: auto; }
     .shot:hover { border-color: var(--accent); }
     .shot span { position: absolute; padding: 3px 10px; border-radius: 999px; background: rgb(0 0 0 / 72%); color: var(--text); font-size: 12px; font-weight: 650; }
     .shot .tl { top: 8px; left: 8px; }
     .shot .bl { bottom: 8px; left: 8px; }
     .shot .br { bottom: 8px; right: 8px; }
-    .s-top { left: 22%; top: 0; z-index: 4; }
-    .s-right { left: 50%; top: 24%; z-index: 3; }
-    .s-bottom { left: 20%; top: 56%; z-index: 2; }
-    .s-left { left: 0; top: 26%; z-index: 1; }
-    .s-left.over { z-index: 5; clip-path: inset(0 0 33% 0); box-shadow: none; }
+    .s-1 { left: 0; top: 0; z-index: 1; }
+    .s-2 { left: 28%; top: 5%; z-index: 3; }
+    .s-3 { left: 56%; top: 0; z-index: 2; }
+    .s-4 { left: 12%; top: 42%; z-index: 4; }
+    .s-5 { left: 44%; top: 48%; z-index: 5; }
     .shots-note { margin: 10px 0 0; font-size: 13px; text-align: center; }
     @media (max-width: 700px) {
       .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; aspect-ratio: auto; }
       .shot { position: relative; inset: auto; width: auto; box-shadow: none; }
-      .s-left.over { display: none; }
-      .s-left { order: 4; }
+      .s-5 { grid-column: 1 / -1; }
       .shot span { font-size: 10px; padding: 2px 7px; }
     }
     footer { margin-top: 56px; color: var(--muted); font-size: 13px; text-align: center; }
@@ -115,27 +113,40 @@
       <img src="icon.png" alt="">
       <div>
         <h1>MercScribe</h1>
-        <p>Record your script, and MercScribe finds every take of every line, so you keep the best ones and get to the mix, the subtitles and the shorts faster.</p>
+        <p>Record your script, and MercScribe finds every take of every line, so you keep the best ones. Then mix them, subtitle the mix and put an intro and outro around it, all the way to a finished video. And cut shorts from it, or from any video.</p>
         <a class="button" id="download" href="#">⤓ Download for Windows</a>
         <div class="download-meta muted" id="downloadMeta">Free · Windows 10 and 11, 64-bit</div>
       </div>
     </section>
 
     <div class="shots" aria-label="What MercScribe looks like">
-      <a class="shot s-top" href="screens/line-edit.jpg" target="_blank"><img src="screens/line-edit.jpg" alt="1 · Line edit: the recording's takes in order, the kept ones ticked, with a stretch being transcribed again"><span class="tl">1 · Line edit</span></a>
-      <a class="shot s-right" href="screens/mix.jpg" target="_blank"><img src="screens/mix.jpg" alt="2 · Mix: voice, sound effect and ambience tracks on a timeline, with the script beside it"><span class="br">2 · Mix</span></a>
-      <a class="shot s-bottom" href="screens/subtitles.jpg" target="_blank"><img src="screens/subtitles.jpg" alt="3 · Subtitles: the subtitles over the picture, with the waveform and the list of subtitles"><span class="bl">3 · Subtitles</span></a>
-      <a class="shot s-left" href="screens/shorts.jpg" target="_blank"><img src="screens/shorts.jpg" alt="4 · Shorts: a stream with boxes choosing what the vertical short shows"><span class="tl">4 · Shorts</span></a>
-      <a class="shot s-left over" href="screens/shorts.jpg" target="_blank" aria-hidden="true" tabindex="-1"><img src="screens/shorts.jpg" alt=""><span class="tl">4 · Shorts</span></a>
+      <a class="shot s-1" href="screens/line-edit.jpg" target="_blank"><img src="screens/line-edit.jpg" alt="1 · Line edit: the recording's takes in order, the kept ones ticked, with a stretch being transcribed again"><span class="tl">1 · Line edit</span></a>
+      <a class="shot s-2" href="screens/mix.jpg" target="_blank"><img src="screens/mix.jpg" alt="2 · Mix: voice, sound effect and ambience tracks on a timeline, with the script beside it"><span class="tl">2 · Mix</span></a>
+      <a class="shot s-3" href="screens/subtitles.jpg" target="_blank"><img src="screens/subtitles.jpg" alt="3 · Subtitles: the subtitles over the picture, with the waveform and the list of subtitles"><span class="tl">3 · Subtitles</span></a>
+      <a class="shot s-4" href="screens/intro-outro.jpg" target="_blank"><img src="screens/intro-outro.jpg" alt="4 · Intro &amp; outro: the finished video between an intro and an outro on a timeline, with the preview and inspector"><span class="bl">4 · Intro &amp; outro</span></a>
+      <a class="shot s-5" href="screens/shorts.jpg" target="_blank"><img src="screens/shorts.jpg" alt="5 · Shorts: a stream with boxes choosing what the vertical short shows"><span class="br">5 · Shorts</span></a>
     </div>
     <p class="shots-note muted">Click a picture to see it bigger.</p>
 
     <h2>What it does</h2>
     <div class="grid">
       <div class="card"><div class="step">1 · Line edit</div><h3>Every take, matched to its line</h3><p>Whisper transcribes your recordings and matches them to your script. Pick the keepers, spot improv and bloopers, and export the edit as WAV and SRT.</p></div>
-      <div class="card"><div class="step">2 · Mix</div><h3>Build the finished audio</h3><p>Your kept takes on a track per voice, with sound effects and ambience. Fades, volume and pan over time, then export the mix, or a timeline to go on in your video editor.</p></div>
-      <div class="card"><div class="step">3 · Subtitles</div><h3>Subtitles from the words you said</h3><p>Fine-tune them on the finished mix, style them, and export SRT or an MP4 with the subtitles burned in over your picture.</p></div>
-      <div class="card"><div class="step">4 · Shorts</div><h3>Vertical shorts with captions</h3><p>Cut shorts from any video, even a 4-hour stream, with captions made for you.</p></div>
+      <div class="card"><div class="step">2 · Mix</div><h3>Build the finished audio</h3><p>Your kept takes on a track per voice, with sound effects and ambience from your own library. Fades, volume and pan over time, EQ, de-esser and compressor, then export the mix, or a timeline to go on in your video editor.</p></div>
+      <div class="card"><div class="step">3 · Subtitles</div><h3>Subtitles from the words you said</h3><p>Lined up with the audio and spelled as your script has it. Fine-tune and style them, put them over a picture or a video of your own, and export SRT or an MP4 with the subtitles burned in.</p></div>
+      <div class="card"><div class="step">4 · Intro &amp; outro</div><h3>The finished video</h3><p>Put your video between an intro and an outro, with titles, credits, your supporters' names, music and transitions. A wizard sets them up, and you can save them for the next video.</p></div>
+      <div class="card"><div class="step">5 · Shorts</div><h3>Vertical shorts with captions</h3><p>Cut shorts from any video, even a 4-hour stream, with captions made for you. <i>Suggest moments</i> finds the laughs, screams and shouts.</p></div>
+    </div>
+
+    <h2>Also in MercScribe</h2>
+    <div class="card">
+      <ul class="notes">
+        <li><b>Versions in one project:</b> say, one for a male and one for a female listener, or any alternatives your script needs. Write them as <i>he/she</i>, and each such line is recorded and kept per version, with a mix, subtitles and a video of each.</li>
+        <li><b>Bring a line edit you've already made</b> elsewhere: MercScribe still shows which script lines it's missing and where it goes off the script.</li>
+        <li><b>Every line as a file of its own,</b> named in the script, with alternative takes as extra files and even loudness if you like.</li>
+        <li><b>Sounds to censor:</b> finds kisses and mouth sounds in the mix and exports them as markers for your video editor. It learns from what you mark.</li>
+        <li><b>Tools:</b> clean up a recording (loudness, noise and room echo), rebuild an edit from the original recording, stitch audio files together, and a time log of how long you've worked on each project.</li>
+        <li><b>Streaming mode</b> hides your folders and file paths while you're live.</li>
+      </ul>
     </div>
 
     <h2 id="newHead" hidden>New in <span id="newVersion"></span></h2>
